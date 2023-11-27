@@ -8,7 +8,6 @@ This node dataclass is the format of each data point that will be imported from 
 @dataclass
 class Node:
     # Properties
-    pos: pygame.Vector2
     color: str = "BLACK"
     cluster: int = -1
     # Data
@@ -16,23 +15,21 @@ class Node:
     data: list[int]
 
 """
-This DataController object serves as the central hub of the data.
+This DataHandler object serves as the central hub of the data.
     It imports data and handles updating each unique node's ID, color, and data.
 """
-class DataController:
+class DataHandler:
     def __init__(self, filename: str):
         self.dataSet = self.importFromFile(filename)        # Data as list[Node]
 
     # This function takes a string input and returns 
     def importFromFile(self, filename: str) -> list[Node]:
         with open(filename) as file:
-            csv_reader = csv.reader(file, delimiter=',')
+            csvReader = csv.reader(file, delimiter=',')
             lineCount = 1
-            for row in csv_reader:
-                # Write Per Node Operations here
-                self.dataSet[lineCount].id = row[1]
-                for data in row:
-                    self.dataSet[lineCount].data.append(data)
+            for row in csvReader: # Each row of the csv gets loaded into list "row"
+                self.dataSet[lineCount].id = row[1:] # 1: Slice the first element
+                self.dataSet[lineCount].data = row
 
     def updateColor(self, node):
             match node.cluster:

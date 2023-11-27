@@ -1,7 +1,7 @@
 # Import the Pygame library
 import pygame
 import debug
-# from importStep import
+from dataHandler import DataHandler
 # from visualStep import
 # from processStep import
 
@@ -19,6 +19,9 @@ pygame.display.set_caption("k-Means Visualizer")
 # Game loop control variable
 running = True
 
+# Initialize Handlers
+data = DataHandler("data.csv")
+
 # Main game loop
 while running:
     # Event handling loop
@@ -27,9 +30,6 @@ while running:
         if event.type == pygame.QUIT:
             running = False
     
-    # importFromFile(data, filename)
-    # renderData(data, screen)
-    # processData(data, iterations)
 
     screen.fill("WHITE")
 
